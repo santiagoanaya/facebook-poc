@@ -36,11 +36,11 @@ statusChangeCallback(response);
 }
 window.fbAsyncInit = function() {
 FB.init({
-appId : '413572555717269',
+appId : '1030527387142677',
 cookie : true, // enable cookies to allow the server to access
 // the session
 xfbml : true, // parse social plugins on this page
-version : 'v2.2' // use version 2.2
+version : 'v3.1' // use version 2.2
 });
 // Now that we've initialized the JavaScript SDK, we call
 // FB.getLoginStatus(). This function gets the state of the
@@ -71,10 +71,12 @@ fjs.parentNode.insertBefore(js, fjs);
 // successful. See statusChangeCallback() for when this call is made.
 function testAPI() {
 console.log('Welcome! Fetching your information.... ');
-FB.api('/me?fields=name,email', function(response) {
+FB.api('/me','GET',{"fields":"id,name,birthday,age_range,location"}, function(response) {
 console.log('Successful login for: ' + response.name);
 
 document.getElementById("status").innerHTML = '<p>Welcome '+response.name+'! <a href=login.php?name='+ response.name.replace(" ", "_") +'&email='+ response.email +'>Continue with facebook login</a></p>'
+document.getElementById("status").innerHTML = '<p>Your data '+response.birthday+' '+response.age_range.min+' '+response.location.name+' </p>'
+console.log(response)
 });
 }
 </script>
@@ -91,5 +93,11 @@ the FB.login() function when clicked.
 <script type="text/javascript">
 </script>
 </center>
+<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
 </body>
 </html>
